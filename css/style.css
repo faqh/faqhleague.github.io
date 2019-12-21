@@ -1,0 +1,113 @@
+.brand-logo{
+    font-family: yellowtail;
+    font-weight: 700;
+}
+
+.tagline{
+    margin-top: 30%;
+    text-align: center;    
+    color: white;
+}
+
+.tagline h1{
+    font-family: Yellowtail;
+    font-weight: 700;    
+}
+
+.tagline p{
+    font-family: lato;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 40px;
+}
+
+.table-header{
+    /* background-color: #212121; */
+    background-image: url(../img/bg-table.jfif);
+    background-size: cover;
+    height: 200px;
+    color: white;
+    font-family: lato;
+    margin-bottom: 100px;
+    
+}
+
+table{
+    background-color: #000000;
+    color: white;
+}
+
+
+table tr:nth-child(even){
+    background-color:#212121 ;
+}
+
+.klasmen img{
+    margin-right: 20px;    
+}
+
+.klasmen td{
+    font-family: lato;    
+    font-size: 18px;
+}
+
+.klasmen table td a{
+    display: flex;    
+    align-items: center;
+}
+
+.club-header{
+    width: 100%;
+    background-image: url('../img/bg-club.jfif');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    font-family: lato;
+    padding: 20px 0;
+}
+
+
+.club-header .card{    
+    height: 150px;  
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.club-header .card img{
+    width: 25px;
+    height: auto;
+}
+
+.club-header .tombol a{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.detail a{
+    margin-right: 15px;
+}
+
+.card-image {
+    padding: 30px;
+    border-radius: 10px;
+    background-image: url('../img/bg.jfif');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+.post-table{
+    background-color: #37474f;
+    width: 30px;
+    padding: 3px 5px;
+    margin-left: 10px;
+}
+

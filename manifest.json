@@ -1,0 +1,17 @@
+{
+    "name": "Faqh League",
+    "gcm_sender_id": "635113977595",
+    "short_name": "faqhL",
+    "description": "Football League",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#212121",
+    "theme_color": "#212121",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
