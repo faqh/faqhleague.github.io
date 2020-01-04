@@ -1,3 +1,10 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+body{
+    background-color: #121212;
+}
+
 .brand-logo{
     font-family: yellowtail;
     font-weight: 700;
@@ -15,39 +22,69 @@
 }
 
 .tagline p{
-    font-family: lato;
+    /* font-family: lato; */
     font-size: 18px;
     font-weight: 400;
     line-height: 40px;
 }
 
+
 .table-header{
     /* background-color: #212121; */
-    background-image: url(../img/bg-table.jfif);
+    background-image: url(../img/bg-klasmen.jpg);    
     background-size: cover;
+    background-repeat: no-repeat;
     height: 200px;
     color: white;
-    font-family: lato;
+    /* font-family: lato; */
     margin-bottom: 100px;
     
 }
 
+.table-header .header{
+    /* background-color: aqua; */
+}
+
 table{
-    background-color: #000000;
-    color: white;
+    background-color:rgba( 255, 255, 255, 0.02);
+    box-shadow:0 0 16px 0.5px #0A0A0A;
+    border-radius: 16px;
 }
 
-
-table tr:nth-child(even){
-    background-color:#212121 ;
+table tbody{
+    background-color:rgba(255, 255, 255, 0.04);
+    color: white;   
+    
 }
+
+table thead{
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    /* background-color:rgba( 255, 255, 255, 0.02); */
+    color: white;   
+     
+}
+
+table tr th{
+    padding: 24px 24px 24px 24px !important;
+}
+
+table tr td{
+    padding: 20px 24px 19px 24px !important;
+}
+
+table .konten:hover{
+    background-color: rgba(255, 255, 255, 0.08);  
+    transition: all 1s ease;
+}
+
 
 .klasmen img{
     margin-right: 20px;    
 }
 
 .klasmen td{
-    font-family: lato;    
+    /* font-family: 'Open Sans', sans-serif;     */
     font-size: 18px;
 }
 
@@ -58,7 +95,7 @@ table tr:nth-child(even){
 
 .club-header{
     width: 100%;
-    background-image: url('../img/bg-club.jfif');
+    background-image: url('../img/bg-club.jpg');
     background-size: cover;
     background-position: center;
     color: white;
@@ -69,7 +106,7 @@ table tr:nth-child(even){
 
 .club-header .card{    
     height: 150px;  
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.75);
     border-radius: 20px ;
     display: flex;
     flex-direction: column;
@@ -82,32 +119,31 @@ table tr:nth-child(even){
     height: auto;
 }
 
-.club-header .tombol a{
-    display: block;
-    margin-bottom: 10px;
-}
 
 .detail a{
     margin-right: 15px;
 }
 
-.card-image {
+.favorite{
+    background-color: rgba( 255, 255, 255, 0.02);
+    color: white;
+    border-radius: 8px;
+}
+
+.favorite .card-image {
     padding: 30px;
-    border-radius: 10px;
-    background-image: url('../img/bg.jfif');
+    border-radius: 8px 8px 0 0;
+    background-image: url('../img/bg-favorite.jpg');
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 
 
-.post-table{
-    background-color: #37474f;
-    width: 30px;
-    padding: 3px 5px;
-    margin-left: 10px;
-}
+
+
+
+
 

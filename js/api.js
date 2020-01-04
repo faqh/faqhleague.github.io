@@ -1,4 +1,13 @@
 const base_url = "https://api.football-data.org/v2/";
+const api_token = 'f871ca32512a4e5787cebb25dc333fcb';
+let fetchApi = url => {
+	return fetch(url, {	  
+	  headers: {
+		'X-Auth-Token': api_token
+	  }
+	});
+  }
+  
 
 // Blok kode yang akan di panggil jika fetch berhasil
 function status(response) {
@@ -26,13 +35,12 @@ function error(error) {
 // Blok kode untuk melakukan request data json
 function getKlasemen() {
 	
-	
   if ("caches" in window) {
     caches.match(base_url + "competitions/2014/standings?standingType=HOME",{
-	  headers: new Headers({
-		  'X-Auth-Token': 'f871ca32512a4e5787cebb25dc333fcb'
-	  })
-  }).then(function(response) {
+		headers: new Headers({
+			'X-Auth-Token': api_token
+		})
+	}).then(function(response) {
 	  var klasemensHTML = "";		  
 		  var favorite=false;
       if (response) {
@@ -42,11 +50,11 @@ function getKlasemen() {
 			  data.standings.forEach(function(result){			
 				
 				klasemensHTML += `
-				<table class="responsive-table">
+				<table class="responsive-table ">
 				  <thead>
 				  <tr>
 					<th class="center">Position</th> 
-					<th >Club</th>
+					<th>Club</th>
 					<th class="center">Played</th>
 					<th class="center">Won</th>
 					<th class="center">Draw</th>
@@ -81,19 +89,19 @@ function getKlasemen() {
 					  }
 					});
 					 
-						klasemensHTML += `<tr>
-						<td class="post"><div class="card center post-table">${tabel.position}</div></td>
+						klasemensHTML += `<tr class=" konten hoverable">
+						<td class="post center">${tabel.position}</td>
 						`;
 						
 						
 						klasemensHTML +=`
-						<td> <a class="white-text" href="./klub.html?id=${tabel.team.id}"><img src="${tabel.team.crestUrl.replace(/^http:\/\//i, 'https://')}" style="max-width:50px;">${tabel.team.name}</a></td>
-							<td class="center">${tabel.playedGames}</td>
-							<td class="center">${tabel.won}</td>
-							<td class="center">${tabel.draw}</td>
-							<td class="center">${tabel.lost}</td>				
-							<td class="center">${tabel.points}</td>
-						</tr>
+						<td><a class="white-text" href="./pages/klub.html?id=${tabel.team.id}"><img src="${tabel.team.crestUrl.replace(/^http:\/\//i, 'https://')}" style="width:54px; height:78px;">${tabel.team.name}</a></td>
+				<td class="center">${tabel.playedGames}</td>
+				<td class="center">${tabel.won}</td>
+				<td class="center">${tabel.draw}</td>
+				<td class="center">${tabel.lost}</td>				
+				<td class="center">${tabel.points}</td>
+				</tr>
 								`;
 							});
 						
@@ -104,18 +112,14 @@ function getKlasemen() {
 				
 		  }
           // Sisipkan komponen card ke dalam elemen dengan id #content
-          document.getElementById("content-utama").innerHTML = klasemensHTML;
+          document.getElementById("table-league").innerHTML = klasemensHTML;
         });
       }
     });
   }
 
   
-  fetch(base_url + "competitions/2014/standings?standingType=HOME",{
-	  headers: new Headers({
-		  'X-Auth-Token': 'f871ca32512a4e5787cebb25dc333fcb'
-	  })
-  })
+  fetchApi(base_url + "competitions/2014/standings?standingType=HOME")
     .then(status)
     .then(json)
     .then(function(data) {
@@ -128,11 +132,11 @@ function getKlasemen() {
         klasemensHTML += `
               
 				  
-				  <table class="responsive-table">
+				  <table class="responsive-table ">
 				  <thead>
 				  <tr>
-					<th >Position</th> 
-					<th >Club</th>
+					<th class="center">Position</th> 
+					<th>Club</th>
 					<th class="center">Played</th>
 					<th class="center">Won</th>
 					<th class="center">Draw</th>
@@ -166,20 +170,22 @@ function getKlasemen() {
 					  }
 					});
 				  
-				klasemensHTML += `<tr class="">
-				<td class="post"><div class="card center post-table">${tabel.position}</div></td>
+				klasemensHTML += `				
+				<tr class=" konten hoverable">
+				<td class="post center">${tabel.position}</td>
 				`;
 					
 				
 				
 			klasemensHTML +=`				
-				<td> <a class="white-text" href="./klub.html?id=${tabel.team.id}"><img src="${tabel.team.crestUrl.replace(/^http:\/\//i, 'https://')}" style="max-width:50px;">${tabel.team.name}</a></td>
+				<td><a class="white-text" href="./pages/klub.html?id=${tabel.team.id}"><img src="${tabel.team.crestUrl.replace(/^http:\/\//i, 'https://')}" style="width:54px; height:78px;">${tabel.team.name}</a></td>
 				<td class="center">${tabel.playedGames}</td>
 				<td class="center">${tabel.won}</td>
 				<td class="center">${tabel.draw}</td>
 				<td class="center">${tabel.lost}</td>				
 				<td class="center">${tabel.points}</td>
 				</tr>
+				
 				`;
 			});
 
@@ -187,10 +193,62 @@ function getKlasemen() {
               
             `;
       });
-	  document.getElementById("content-utama").innerHTML = klasemensHTML;
+	  document.getElementById("table-league").innerHTML = klasemensHTML;
     })
     .catch(error);
 }
+
+// function getScorers() {
+// 	if("caches" in window) {
+// 	  caches.match(base_url + "competitions/2014/scorers").then(function(response){
+// 		if(response) {
+// 		  response.json().then(function(data){
+// 		// Objek/array JavaScript dari response.json() masuk lewat data.
+// 		// Menyusun komponen card artikel secara dinamis
+// 		console.log(data);
+// 		var scorersHTML = "";
+// 		data.scorers.forEach(function(player) {
+// 			scorersHTML += `
+// 				  <tr>
+// 					  <td>
+// 						  <h5>${player.player.name}</h5>
+// 						  <p>${player.team.name}</p>
+// 					  </td>
+// 					  <td>${player.player.nationality}</td>
+// 					  <td>${player.numberOfGoals}</td>
+// 				  </tr>
+// 				`;
+// 		  });
+// 		  // Sisipkan komponen card ke dalam elemen dengan id #content
+// 		  document.getElementById("scorers").innerHTML = scorersHTML;
+// 	  });
+// 	}
+// 	});
+//   }
+  
+//   fetchApi(base_url + "competitions/2014/scorers")
+//   .then(status)
+//   .then(json)
+//   .then(function(data) {
+// 	  console.log(data);
+// 	var scorersHTML = "";
+// 		data.scorers.forEach(function(player) {
+// 		  scorersHTML += `
+// 				<tr>
+// 					<td>
+// 						<h5>${player.player.name}</h5>
+// 						<p>${player.team.name}</p>
+// 					</td>
+// 					<td>${player.player.nationality}</td>
+// 					<td>${player.numberOfGoals}</td>
+// 				</tr>
+// 			  `;
+// 		});
+// 		// Sisipkan komponen card ke dalam elemen dengan id #content
+// 		document.getElementById("scorers").innerHTML = scorersHTML;
+// 	  })
+// 	  .catch(error);
+// 	}
 
 function setfav(id,nama,crestUrl,venue,fav){
 	
@@ -207,14 +265,14 @@ function setfav(id,nama,crestUrl,venue,fav){
 			var tx = db.transaction('klub', 'readwrite');
 			var store = tx.objectStore('klub');
 			var iconTeam = crestUrl.replace(/^http:\/\//i, 'https://');
-			iconTeam = iconTeam
+			iconTeam = iconTeam;
 			var item = {
 				nama: nama,
 				crestUrl: iconTeam,
 				venue: venue,
 				id: id
 			};
-			store.add(item, id); 
+			store.put(item, id); 
 			return tx.complete;
 		}
 	}).then(function() {
@@ -269,17 +327,23 @@ function getFavorite(){
 			favHTML="";		
 			val.forEach(function(data){
 				favHTML += `
-							<div class="card center">
+
+						<div class="card center favorite">
 							<div class="card-image">
-							<img class="center" style="width: 250px; height: auto;" src="`+data.crestUrl+`">							
+								<img class="center" style="width: 250px; height: auto;" src="`+data.crestUrl+`">
+								<a href="javascript:" onclick="setDel('${data.id}'), M.toast({html: 'Klub Favorite berhasil dihapus'}), window.location.reload()" class="btn-floating halfway-fab waves-effect waves-light red btn-large">
+									<i class="large material-icons">delete</i>
+								</a>								
+        					
 							</div>
 							<div class="card-content">
-							<h4>`+data.nama+`</h4>
-							<p>`+data.venue+`</p>
-							</div>							
-						</div>				
+								<h4>`+data.nama+`</h4>
+								<p>`+data.venue+`</p>
+							</div>
+					  </div>				
 				`;
 			});
+			
 			
 			
 		}
@@ -289,6 +353,8 @@ function getFavorite(){
 
 	  });
 }
+
+
 
 function getKlubById() {
   // Ambil nilai query parameter (?id=)
@@ -326,39 +392,35 @@ function getKlubById() {
 					<div class="tombol fixed-action-btn">
 					  <a href="javascript:" onclick="setfav('${data.id}','${data.name}','${data.crestUrl}','${data.venue}',`+favorite+`), M.toast({html: 'Klub Favorite berhasil disimpan'})" id="icon_fav${data.id}" class="btn-floating btn-large green">
 						  <i class="large material-icons">save</i>
-					  </a>
-					  <a href="javascript:" onclick="setDel('${data.id}','${data.name}','${data.crestUrl}','${data.venue}',`+favorite+`), M.toast({html: 'Klub Favorite berhasil dihapus'})" class="btn-floating btn-large red ">
-						<i class="large material-icons">delete</i>
-					</a>
-					</div>
-				   
+					  </a>					 
+					</div>				   
 				
 				  <div class="row">
 					  <div class="col s12 m8 offset-m2 xl10 offset-xl1 center">
 						  <h1 class="teamName">${data.name}</h1>
-						  <img style="width: 300px; height: auto;" class="teamLogo" src="${data.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="ic_klub">
+						  <img style="width: 300px; height: auto;  margin-bottom:54px;" class="teamLogo" src="${data.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="ic_klub">
 					  </div>							
 				  </div>
 				  <div class="row">
-					  <div class="col s6 m6  xl3 center">
+					  <div class="col s12 m6  xl3 center">
 							<div class="card  center">
 							  <img src="/img/icon/stadium.png" alt="ic_stadium">
 							  <p>${data.venue}</p>
 						  </div>
 					  </div>
-					  <div class="col s6 m6 xl3 center">
+					  <div class="col s12 m6 xl3 center">
 							<div class="card  center">
 								<img src="/img/icon/alamat.png" alt="ic_alamat">
 							  <p>${data.address}</p>
 						  </div>
 					  </div>
-					  <div class="col s6 m6  xl3 center">
+					  <div class="col s12 m6  xl3 center">
 							<div class="card  center">
 								<img src="/img/icon/telfon.png" alt="ic_telfon">
 							  <p>${data.phone}</p>
 						  </div>
 					  </div>
-					  <div class="col s6 m6  xl3 center">
+					  <div class="col s12 m6  xl3 center">
 							<div class="card  center">
 								<img src="/img/icon/website.png" alt="ic_website">
 							  <p>${data.website}</p>
@@ -372,28 +434,28 @@ function getKlubById() {
 			  <div class="row">
 				  <div class="col s12">          																
 			  
-				  <h3 class="center">SQUAD</h3>
+				  <h3 class="center white-text">SQUAD</h3>
 				  <table>
 					  <thead>
-						  <tr>
-							  <th>Shirt Number</th>
-							  <th>Name</th>
-							  <th>Position</th>
-							  <th>Nationality</th> 					
-											  
-						  </tr>
+					  <tr>
+					  <th class="center hide-on-small-only">Shirt Number</th>
+					  <th >Name</th>
+					  <th class="center">Position</th>
+					  <th class="center">Nationality</th> 					
+									  
+				  </tr>
 					  </thead>
 			`;
 				data.squad.forEach(function(squad){
 					klubHTML+= `
 					<tr>
-					<td>${squad.shirtNumber}</td>
-					<td>${squad.name}</td>
-					<td>${squad.position}</td>
-					<td>${squad.nationality}</td> 				
-					
-					
-				</tr>
+						<td class="center hide-on-small-only">${squad.shirtNumber}</td>
+						<td >${squad.name}</td>
+						<td class="center">${squad.position}</td>
+						<td class="center">${squad.nationality}</td> 				
+						
+						
+					</tr>
 			   `
 		   })  
 	   klubHTML += `</table>																		   	
@@ -410,11 +472,7 @@ function getKlubById() {
     });
   }
 
-  fetch(base_url + "teams/" + idParam,{
-	  headers: new Headers({
-		  'X-Auth-Token': 'f871ca32512a4e5787cebb25dc333fcb'
-	  })
-  	})
+  fetchApi(base_url + "teams/" + idParam)
     .then(status)
     .then(json)
     .then(function(data) {
@@ -448,41 +506,38 @@ function getKlubById() {
 			  <div class="club-header black">			  
 				  <div class="container">
 					  <div class="tombol fixed-action-btn">
-						<a href="javascript:" onclick="setfav('${data.id}','${data.name}','${data.crestUrl}','${data.venue}',`+favorite+`), M.toast({html: 'Klub Favorite berhasil disimpan'})" id="icon_fav${data.id}" class="btn-floating btn-large green">
+						<a href="javascript:" onclick="setfav('${data.id}','${data.name}','${data.crestUrl}','${data.venue}',`+favorite+`), M.toast({html: 'Klub Favorite berhasil disimpan'})" id="icon_fav${data.id}" class="btn-floating btn-large green pulse">
 							<i class="large material-icons">save</i>
-						</a>
-						<a href="javascript:" onclick="setDel('${data.id}','${data.name}','${data.crestUrl}','${data.venue}',`+favorite+`), M.toast({html: 'Klub Favorite berhasil dihapus'})" class="btn-floating btn-large red ">
-					  	<i class="large material-icons">delete</i>
-					  </a>
+						</a>						
 					  </div>
 					 
 				  
 					<div class="row">
 						<div class="col s12 m8 offset-m2 xl10 offset-xl1 center">
 							<h1 class="teamName">${data.name}</h1>
-							<img style="width: 300px; height: auto;" class="teamLogo" src="${data.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="ic_klub">
+							<img style="width: 300px; height: auto; margin-bottom:54px; margin-top:24px;" class="teamLogo" src="${data.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="ic_klub">
 						</div>							
 					</div>
 					<div class="row">
-						<div class="col s6 m6  xl3 center">
+						<div class="col s12 m6  xl3 center">
 		  					<div class="card  center">
 								<img src="/img/icon/stadium.png" alt="ic_stadium">
 								<p>${data.venue}</p>
 							</div>
 						</div>
-						<div class="col s6 m6 xl3 center">
+						<div class="col s12 m6 xl3 center">
 		  					<div class="card  center">
 							  	<img src="/img/icon/alamat.png" alt="ic_alamat">
 								<p>${data.address}</p>
 							</div>
 						</div>
-						<div class="col s6 m6  xl3 center">
+						<div class="col s12 m6  xl3 center">
 		  					<div class="card  center">
 							  	<img src="/img/icon/telfon.png" alt="ic_telfon">
 								<p>${data.phone}</p>
 							</div>
 						</div>
-						<div class="col s6 m6  xl3 center">
+						<div class="col s12 m6  xl3 center">
 		  					<div class="card  center">
 							  	<img src="/img/icon/website.png" alt="ic_website">
 								<p>${data.website}</p>
@@ -496,14 +551,14 @@ function getKlubById() {
 				<div class="row">
 					<div class="col s12">          																
 				
-					<h3 class="center">SQUAD</h3>
+					<h3 class="center white-text" style="margin-bottom:32px;">SQUAD</h3>
 					<table>
 						<thead>
 							<tr>
-								<th>Shirt Number</th>
-								<th>Name</th>
-								<th>Position</th>
-								<th>Nationality</th> 					
+								<th class="center hide-on-small-only">Shirt Number</th>
+								<th >Name</th>
+								<th class="center">Position</th>
+								<th class="center">Nationality</th> 					
 												
 							</tr>
 						</thead>
@@ -511,10 +566,10 @@ function getKlubById() {
            	data.squad.forEach(function(squad){           		
            		klubHTML+= `
            			<tr>
-						<td>${squad.shirtNumber}</td>
-						<td>${squad.name}</td>
-						<td>${squad.position}</td>
-						<td>${squad.nationality}</td> 				
+						<td class="center hide-on-small-only">${squad.shirtNumber}</td>
+						<td >${squad.name}</td>
+						<td class="center">${squad.position}</td>
+						<td class="center">${squad.nationality}</td> 				
 						
 						
 					</tr>

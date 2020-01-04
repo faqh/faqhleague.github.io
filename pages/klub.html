@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Faqh League</title>
+    <meta name="description" content="Info Sepakbola" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/materialize.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/font.css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="manifest" href="../manifest.json" />
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/public/icon1.png">
+    <meta name="theme-color" content="#000000" />
+  </head>
+  <body>    
+    <nav class="black">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo center"><img src="/logo.png" alt="logo" style="width: 80px; height: 40px;"></a>
+        <a href="./../index.html#table" class="sidenav-trigger" data-target="nav-mobile">
+          <i class="material-icons">arrow_back</i>
+        </a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="./../index.html#table"><i class="material-icons">arrow_back</i></a></li>
+         
+        </ul>
+      </div>
+    </nav>
+    <!-- Akhir Navigasi -->
+    <div id="body-content">
+      
+    </div>
+    <script type="text/javascript" src="../static/lib/idb.js"></script>
+    <script src="../js/materialize.min.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/skrip.js"></script>
+    <!-- <script src="../js/script.js"></script> -->
+    <script src="../js/jquery-1.7.2.min.js"></script>
+	
+    <script>      
+    document.addEventListener("DOMContentLoaded", function() {
+        getKlubById();
+    });
+    </script>
+  </body>
+</html>

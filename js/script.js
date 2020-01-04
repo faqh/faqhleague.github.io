@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
+  var tab = document.querySelectorAll(".tabs");
+  M.Tabs.init(tab);
   // Activate sidebar nav
   var elems = document.querySelectorAll(".sidenav");
   M.Sidenav.init(elems);
@@ -35,6 +37,12 @@ document.addEventListener("DOMContentLoaded", function() {
     xhttp.send();
   }
 
+  // Load page content
+  var page = window.location.hash.substr(1);
+  if (page == "") page = "home";
+  loadPage(page);
+  
+  
   // Load page content
   var page = window.location.hash.substr(1);
   if (page == "") page = "home";
